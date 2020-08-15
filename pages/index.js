@@ -83,7 +83,7 @@ function Home(props) {
               boxShadow: `0px ${shadowSize}px yellow`
             }}
           >
-            <Square size={hyp} type="base" />
+            <Square size={hyp} type="hypotenuse" />
           </div>
           {/* red */}
           <div style={{ marginLeft: mLeft, zIndex: 1000 }}>

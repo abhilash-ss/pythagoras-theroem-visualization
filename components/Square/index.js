@@ -7,13 +7,20 @@ function Square({ size, type, opacity = 1 }) {
     type === "base" ? "square__cell--base" : "square__cell--altitude";
   return (
     <div className={styles.square} style={{ opacity: opacity }}>
-      {row.map((i) => {
+      {row.map((i, rowIndex) => {
         return (
           <div className={styles.square__row}>
-            {row.map((i) => (
+            {row.map((i, colIndex) => (
               <div
                 className={styles.square__cell}
-                style={{ background: type === "base" ? "blue" : "red" }}
+                style={{
+                  background:
+                    type === "altitude" ||
+                    (type === "hypotenuse" &&
+                      (!rowIndex || colIndex === size - 1))
+                      ? "red"
+                      : "blue"
+                }}
               />
             ))}
           </div>

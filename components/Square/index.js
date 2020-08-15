@@ -27,14 +27,6 @@ function Square({ size, type, opacity = 1 }) {
           </div>
         );
       })}
-      <style jsx>{`
-        .container {
-          margin: 50px;
-        }
-        p {
-          color: blue;
-        }
-      `}</style>
     </div>
   );
 }

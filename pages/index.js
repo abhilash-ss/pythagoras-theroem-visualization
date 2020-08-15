@@ -1,21 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import { withRouter } from "next/router";
-import Container from "../components/Container";
-import Triangle from "../components/Triangle";
-import Square from "../components/Square";
+import Alert from "../components/Alert";
 
 function Home(props) {
-  const {
-    router: {
-      query: { a, b, c }
-    }
-  } = props;
+  const [side1, setSide1] = useState(0);
+  const [side2, setSide2] = useState(0);
+  const [side3, setSide3] = useState(0);
+  const [isError, setErrorStatus] = useState(false);
 
   const isRightTriangle = (side1, side2, side3) => {
-    if (a <= 0 || b <= 0 || c <= 0) {
+    if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
       return false;
     }
-    const vector = [side1, side2, side3].sort();
+    const vector = [side1, side2, side3].sort((a, b) => a - b);
     if (
       vector[2] * vector[2] ===
       vector[0] * vector[0] + vector[1] * vector[1]
@@ -25,77 +22,98 @@ function Home(props) {
     return false;
   };
 
-  const t = isRightTriangle(3, 5, 4);
-
-  const style = {
-    transform: "rotate(53deg)",
-    transformOrigin: "bottom right",
-    // paddingRight: "62px"
-    // left: "14px",
-    // position: "absolute",
-    // top: "581px"
-    marginBottom: "27%"
+  const onClick = () => {
+    if (isRightTriangle(side1, side2, side3)) {
+      props.router.push(`/pythagoras?a=${side1}&&b=${side2}&&c=${side3}`);
+    } else setErrorStatus(true);
   };
-  const hyp = 5;
-  const alt = 4;
-  const bs = 3;
-  const mLeft =
-    bs > alt ? `-${(bs - alt) * 40 + 5}px` : `-${((alt - bs) * 40 + 5) * 2}px`;
-  // const value = bs < alt ? bs / alt : alt / bs;
-  const angle = Math.asin(alt / hyp) * (180 / Math.PI);
-  const shadowSize = (40 * hyp) / 2;
-  return (
-    <Container>
-      {/* <Triangle sides={[3, 5, 4]} /> */}
-      {/* <div>
-        <div
-          style={{ display: "flex", paddingLeft: "100%", background: "yellow" }}
-        >
-          <Square size={3} type="altitude" />
-        </div>
-        <div style={style}>
-          <Square size={5} type="base" />
-        </div>
-        <div style={{ display: "flex" }}>
-          <Square size={4} type="base" />
-        </div>
-      </div> */}
-      {/* <div style={style}>
-        <Square size={5} type="base" />
-      </div>
-      <div>
-        <div
-          style={{ display: "flex", paddingLeft: "100%", background: "yellow" }}
-        >
-          <Square size={3} type="altitude" />
-        </div>
 
-        <div style={{ display: "flex" }}>
-          <Square size={4} type="base" />
-        </div>
-      </div> */}
-      <div style={{ display: "flex", flexDirection: "column" }}>
-        <div style={{ display: "flex", alignItems: "end" }}>
-          <div
-            style={{
-              transformOrigin: "bottom left",
-              transform: `rotate(-${angle}deg)`,
-              boxShadow: `0px ${shadowSize}px yellow`
-            }}
-          >
-            <Square size={hyp} type="hypotenuse" />
+  return (
+    <div className="container">
+      <main>
+        <h1 className="title">Pythagoras Therorem Visualisation</h1>
+        <p className="descsription">
+          Enter the sides of triangles ang click to see
+        </p>
+        <div className="form">
+          <div>
+            <input
+              placeholder="base"
+              onChange={(event) => setSide1(event.target.value)}
+            />
+            <input
+              placeholder="altitude"
+              onChange={(event) => setSide2(event.target.value)}
+            />
+            <input
+              placeholder="hypotenuse"
+              onChange={(event) => setSide3(event.target.value)}
+            />
           </div>
-          {/* red */}
-          <div style={{ marginLeft: mLeft, zIndex: 1000 }}>
-            <Square size={alt} type="altitude" />
+          <div>
+            <button onClick={onClick}>Click here to visualise</button>
           </div>
         </div>
-        {/* blue */}
-        <div style={{ display: "flex", zIndex: 1000 }}>
-          <Square size={bs} type="base" />
-        </div>
-      </div>
-    </Container>
+        {isError && <Alert message="please enter valid values" />}
+      </main>
+
+      <style jsx>{`
+        .container {
+          min-height: 100vh;
+          padding: 0 0.5rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        main {
+          padding: 5rem 0;
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+        }
+
+        .title {
+          margin: 0;
+          line-height: 1.15;
+          font-size: 4rem;
+        }
+
+        .title,
+        .description {
+          text-align: center;
+        }
+
+        .description {
+          line-height: 1.5;
+          font-size: 1.5rem;
+        }
+
+        .form {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        input {
+          margin: 10px;
+        }
+      `}</style>
+
+      <style jsx global>{`
+        html,
+        body {
+          padding: 0;
+          margin: 0;
+          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
+            sans-serif;
+        }
+      `}</style>
+    </div>
   );
 }
 

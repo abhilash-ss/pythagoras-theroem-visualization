@@ -9,9 +9,10 @@ function Square({ size, type, opacity = 1 }) {
     <div className={styles.square} style={{ opacity: opacity }}>
       {row.map((i, rowIndex) => {
         return (
-          <div className={styles.square__row}>
+          <div className={styles.square__row} key={rowIndex.toString()}>
             {row.map((i, colIndex) => (
               <div
+                key={colIndex.toString()}
                 className={styles.square__cell}
                 style={{
                   background:

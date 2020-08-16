@@ -12,11 +12,7 @@ function Home(props) {
     if (side1 <= 0 || side2 <= 0 || side3 <= 0) {
       return false;
     }
-    const vector = [side1, side2, side3].sort((a, b) => a - b);
-    if (
-      vector[2] * vector[2] ===
-      vector[0] * vector[0] + vector[1] * vector[1]
-    ) {
+    if (side3 * side3 === side1 * side1 + side2 * side2) {
       return true;
     }
     return false;

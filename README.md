@@ -12,9 +12,8 @@ In the project directory, you can run:
  for installing node modules
  
  ### `yarn dev`
- Runs the app in the development mode.
- 
-  ### `yarn test --coverage`
- Runs unit testing and show the coverage. Append `-u` to the command for update and run test cases.
+ Runs the app in the development mode. 
+ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  ### `yarn test --coverage`
+  Runs unit testing and show the coverage. Append `-u` to the command for update and run test cases.

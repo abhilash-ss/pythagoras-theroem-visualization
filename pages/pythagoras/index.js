@@ -10,24 +10,6 @@ function Pythagoras(props) {
     }
   } = props;
 
-  const isRightTriangle = (side1, side2, side3) => {
-    if (a <= 0 || b <= 0 || c <= 0) {
-      return false;
-    }
-    const vector = [side1, side2, side3].sort((a, b) => a - b);
-    if (
-      vector[2] * vector[2] ===
-      vector[0] * vector[0] + vector[1] * vector[1]
-    ) {
-      return true;
-    }
-    return false;
-  };
-
-  const t = isRightTriangle(3, 5, 4);
-
-  const vector = [a, b, c].sort();
-  //   console.log("checking vector", typeof a, Number(vector[2]), a, b, c);
   const hyp = Number(c) || 5;
   const alt = Number(a) || 3;
   const bs = Number(b) || 4;

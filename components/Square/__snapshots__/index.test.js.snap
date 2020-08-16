@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Square should render without crash 1`] = `ShallowWrapper {}`;
+
+exports[`Square should render without type hypotenuse 1`] = `ShallowWrapper {}`;

@@ -14,8 +14,8 @@ function Pythagoras(props) {
   const alt = Number(a) || 3;
   const bs = Number(b) || 4;
 
-  const mLeft =
-    bs > alt ? `-${(bs - alt) * 40 + 5}px` : `-${((alt - bs) * 40 + 5) * 2}px`;
+  const mLeft = `-${(hyp - bs) * 40 + 7}px`;
+  // bs > alt ? `-${(bs - alt) * 40 + 5}px` : `-${((alt - bs) * 40 + 5) * 2}px`;
   // const value = bs < alt ? bs / alt : alt / bs;
   const angle = Math.asin(alt / hyp) * (180 / Math.PI);
   const shadowSize = (40 * hyp) / 2;
